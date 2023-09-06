@@ -11,8 +11,8 @@
 #include <SFML/Window/Export.hpp>
 #include <cstdio>
 #include <iostream>
+
 #define arial "fonts/arial.ttf"
-using namespace std;
 
 class Game {
   private:
