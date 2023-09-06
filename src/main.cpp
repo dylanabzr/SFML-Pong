@@ -1,4 +1,4 @@
-#include "../pong.h"
+#include "../include/pong.h"
 
 int main (){
   Game Jogo;
