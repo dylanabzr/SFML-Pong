@@ -1,6 +1,6 @@
 #include "../include/pong.hpp"
 
 int main (){
-  Game Jogo;
+  StartGame Jogo;
   Jogo.startGame();
 }

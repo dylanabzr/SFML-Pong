@@ -5,7 +5,7 @@ Game::Game(){
   font.loadFromFile(arial);
 }
 
-void Game::ballCollision() {
+void Movement::ballCollision() {
   if (BallX > 800) {
       BallX = 100;
       player_points++;
@@ -18,16 +18,16 @@ void Game::ballCollision() {
   if (BallX >= 780 && BallX <= 790 && BallY + 5 >= enemy_Y && BallY - 5 <= enemy_Y + 70) x_status *= -1;
 }
 
-void Game::ballMove(){
+void Movement::ballMove(){
     ballCollision();
     BallX += 12 *(x_status);
     BallY += 8 * (y_status);
 }
 
-void Game::playerMove(){
+void Movement::playerMove(){
   mouse_position = sf::Mouse::getPosition(window);
 }
-void Game::enemyMove(){
+void Movement::enemyMove(){
   float speed = 7.2f; 
   float deltaY = BallY - enemy_Y;
   if (deltaY < 0) 
@@ -37,7 +37,7 @@ void Game::enemyMove(){
   if (rand() % 100 < 2)
       downmode *= -1; 
 }
-void Game::gameUI(){
+void Graphics::gameUI(){
   ballMove();
   playerMove();
   enemyMove();
@@ -83,7 +83,7 @@ void Game::gameUI(){
   window.display();
 }
 
-void Game::windowLoop(){
+void Graphics::windowLoop(){
   while(window.isOpen()){
     gameUI();
     sf::Event event;
@@ -94,6 +94,6 @@ void Game::windowLoop(){
   }
  }
 
-void Game::startGame(){
+void StartGame::startGame(){
   windowLoop();
 }

@@ -15,7 +15,7 @@
 #define arial "fonts/arial.ttf"
 
 class Game {
-  private:
+  protected:
     sf::Font font;
     sf::Text score_player;
     sf::Text score_enemy;
@@ -27,16 +27,27 @@ class Game {
 
     sf::RenderWindow window{sf::VideoMode(800,600,32), "Window", sf::Style::Titlebar | sf::Style::Close}; 
 
+  public:
+    Game();
+};
+
+class Movement : public Game{
+  protected:
     void ballCollision();
     void ballMove();
     void playerMove();
     void enemyMove();
-    void gameUI();
-    void windowLoop();
 
-  public:
-    Game();
-    void startGame();
 };
 
+class Graphics : public Movement{
+private:
+  void gameUI();
+protected:
+  void windowLoop();
+};
 
+class StartGame : public Graphics{
+  public:
+    void startGame();
+};

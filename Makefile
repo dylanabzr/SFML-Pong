@@ -1,2 +1,2 @@
 build:
-	g++ ./src/*.cpp *.cpp -o pong -lsfml-graphics -lsfml-window -lsfml-system
+	g++ ./src/*.cpp *.cpp -o ./bin/pong -lsfml-graphics -lsfml-window -lsfml-system
