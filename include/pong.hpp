@@ -12,7 +12,7 @@
 #include <cstdio>
 #include <iostream>
 
-#define arial "fonts/arial.ttf"
+#define arial "../fonts/arial.ttf"
 
 class Game {
   protected:

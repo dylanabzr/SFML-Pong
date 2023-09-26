@@ -1,4 +1,4 @@
-#include "include/pong.hpp"
+#include "../include/pong.hpp"
 Game::Game(){
   window.setPosition(sf::Vector2i(10, 50));
   window.setFramerateLimit(60);
