@@ -17,14 +17,12 @@
 class Game {
   protected:
     sf::Font font;
-    sf::Text score_player;
-    sf::Text score_enemy;
+    sf::Text scoreText[2];
 
-    char player_score[5], enemy_score[5];
+    char scoreString[2][5];
     float enemy_Y = 0, BallX = 1, BallY = 1;
-    int downmode = 1, x_status = -1, y_status = 1, player_points = 0, enemy_points = -1;
-    sf::Vector2i mouse_position;    
-
+    int downmode = 1, x_status = -1, y_status = 1, points[2] {0, -1};
+    sf::Vector2i mouse_position;
     sf::RenderWindow window{sf::VideoMode(800,600,32), "Window", sf::Style::Titlebar | sf::Style::Close}; 
 
   public:
@@ -42,7 +40,14 @@ class Movement : public Game{
 
 class Graphics : public Movement{
 private:
+  sf::CircleShape ball;
+  sf::RectangleShape bar[2];
+  sf::RectangleShape line;
+  void initUI();
+  void updateScores();
   void gameUI();
+public:
+  Graphics();
 protected:
   void windowLoop();
 };

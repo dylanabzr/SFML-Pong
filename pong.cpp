@@ -8,10 +8,10 @@ Game::Game(){
 void Movement::ballCollision() {
   if (BallX > 800) {
       BallX = 100;
-      player_points++;
+      points[0]++;
   } else if (BallX < 0) {
       BallX = 700;
-      enemy_points++;
+      points[1]++;
   }
   if (BallY <= 0 || BallY >= 600) y_status *= -1;
   if (BallX >= 10 && BallX <= 20 && BallY + 5 >= mouse_position.y && BallY - 5 <= mouse_position.y + 70) x_status *= -1;
@@ -37,53 +37,51 @@ void Movement::enemyMove(){
   if (rand() % 100 < 2)
       downmode *= -1; 
 }
+
+Graphics:: Graphics() : ball(5.f), line(sf::Vector2f(2.f, 600.f)){
+  for (int i = 0; i < 2; i++)
+    bar[i] = sf::RectangleShape(sf::Vector2f(10.f, 70.f)); 
+}
+
+void Graphics::initUI(){
+  ball.setFillColor(sf::Color::White);
+  bar[0].setFillColor(sf::Color::White);
+  line.setFillColor(sf::Color::White);
+  line.setPosition(400, 0);
+}
+void Graphics::updateScores(){
+  for (int i = 0; i < 2; i++){
+    scoreText[i].setFont(font);
+    std::sprintf(scoreString[i], "%d", points[i]);
+    scoreText[i].setString(scoreString[i]);
+    scoreText[i].setCharacterSize(50);
+    scoreText[i].setFillColor(sf::Color::White);
+    scoreText[i].setPosition((50 + 690 * !i), 500);
+    scoreText[i].setStyle(sf::Text::Regular);
+  }
+}
 void Graphics::gameUI(){
   ballMove();
   playerMove();
   enemyMove();
+  updateScores();
 
   window.clear(sf::Color::Black);
-  score_player.setFont(font);
-  score_enemy.setFont(font);
-  std::sprintf(player_score, "%d", player_points);
-  std::sprintf(enemy_score, "%d", enemy_points);
-  score_player.setString(player_score);
-  score_enemy.setString(enemy_score);
-  score_player.setCharacterSize(50);
-  score_enemy.setCharacterSize(50);
-  score_player.setFillColor(sf::Color::White);
-  score_enemy.setFillColor(sf::Color::White);
-  score_player.setPosition(50, 500);
-  score_enemy.setPosition(740, 500);
-  score_player.setStyle(sf::Text::Regular);
-  score_enemy.setStyle(sf::Text::Regular);
-
-  sf::CircleShape ball(5.f);
-  ball.setFillColor(sf::Color::White);
   ball.setPosition(BallX, BallY);
+  bar[0].setPosition(10, mouse_position.y);
+  bar[1].setPosition(780, enemy_Y);
 
-  sf::RectangleShape player_bar(sf::Vector2f(10.f, 70.f));
-  player_bar.setFillColor(sf::Color::White);
-  player_bar.setPosition(10, mouse_position.y);
-
-  sf::RectangleShape enemy_bar(sf::Vector2f(10.f, 70.f));
-  enemy_bar.setFillColor(sf::Color::White);
-  enemy_bar.setPosition(780, enemy_Y);
-
-  sf::RectangleShape line(sf::Vector2f(2.f, 600.f));
-  line.setFillColor(sf::Color::White);
-  line.setPosition(400, 0);
-
-  window.draw(enemy_bar);
-  window.draw(player_bar);
   window.draw(line);
   window.draw(ball);
-  window.draw(score_player);
-  window.draw(score_enemy);
+  for (int i = 0; i < 2; i++){
+    window.draw(bar[i]);
+    window.draw(scoreText[i]);
+  }
   window.display();
 }
 
 void Graphics::windowLoop(){
+  initUI();
   while(window.isOpen()){
     gameUI();
     sf::Event event;
