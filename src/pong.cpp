@@ -1,4 +1,5 @@
 #include "../include/pong.hpp"
+#include <SFML/Window/Keyboard.hpp>
 Game::Game(){
   window.setPosition(sf::Vector2i(10, 50));
   window.setFramerateLimit(60);
@@ -86,8 +87,8 @@ void Graphics::windowLoop(){
     gameUI();
     sf::Event event;
     while(window.pollEvent(event)){
-      if (event.type == sf::Event::Closed) window.close();
-      else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) window.close();
+      if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
+        window.close();
     }
   }
  }
