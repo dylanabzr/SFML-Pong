@@ -1,9 +1,12 @@
 #include "../include/pong.hpp"
+#include "../include/font.hpp"
 #include <SFML/Window/Keyboard.hpp>
+
 Game::Game(){
   window.setPosition(sf::Vector2i(10, 50));
   window.setFramerateLimit(60);
-  font.loadFromFile(arial);
+  font.loadFromMemory(arial_ttf, arial_ttf_len);
+  //font.loadFromFile(arial);
 }
 
 void Movement::ballCollision() {
