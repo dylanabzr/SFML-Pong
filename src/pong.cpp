@@ -6,7 +6,6 @@ Game::Game(){
   window.setPosition(sf::Vector2i(10, 50));
   window.setFramerateLimit(60);
   font.loadFromMemory(arial_ttf, arial_ttf_len);
-  //font.loadFromFile(arial);
 }
 
 void Movement::ballCollision() {
@@ -34,12 +33,9 @@ void Movement::playerMove(){
 void Movement::enemyMove(){
   float speed = 7.2f; 
   float deltaY = BallY - enemy_Y;
-  if (deltaY < 0) 
-      enemy_Y -= speed;
-  else if (deltaY > 0)
-      enemy_Y += speed;
-  if (rand() % 100 < 2)
-      downmode *= -1; 
+  if (deltaY < 0) enemy_Y -= speed;
+  if (deltaY > 0) enemy_Y += speed;
+  if (rand() % 100 < 2) downmode *= -1; 
 }
 
 Graphics:: Graphics() : ball(5.f), line(sf::Vector2f(2.f, 600.f)){
